@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ztN-4f-Lyo">
+                                <rect key="frame" x="81" y="52" width="92" height="98"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="98" id="VZ9-eT-cd6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                <state key="normal" title="Init"/>
+                                <connections>
+                                    <action selector="clickA:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lz2-8v-R4m"/>
+                                    <action selector="clickInit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qvC-Mc-EJk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2im-fm-jCn">
+                                <rect key="frame" x="203" y="52" width="167" height="98"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="98" id="194-ma-Ve9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                <state key="normal" title="deinit"/>
+                                <connections>
+                                    <action selector="clickA:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FDt-6O-al8"/>
+                                    <action selector="clickDeinit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RL9-g0-sWr"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rkT-r3-GUH">
+                                <rect key="frame" x="0.0" y="150" width="414" height="712"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUL-Pr-Bcr">
+                                        <rect key="frame" x="167" y="0.0" width="80" height="98"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="mcX-Dc-aDi"/>
+                                            <constraint firstAttribute="height" constant="98" id="sSs-SX-6bA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                        <state key="normal" title="A"/>
+                                        <connections>
+                                            <action selector="clickA:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7ID-nC-rIG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4K4-IR-AbL">
+                                        <rect key="frame" x="167" y="204.5" width="80" height="98"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="ElX-8q-V0I"/>
+                                            <constraint firstAttribute="height" constant="98" id="dUJ-gh-ojR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                        <state key="normal" title="B"/>
+                                        <connections>
+                                            <action selector="clickB:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8g3-1Z-MUb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0a2-vg-bBd">
+                                        <rect key="frame" x="89.5" y="409.5" width="235" height="98"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="98" id="XcQ-gh-2Jj"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                        <state key="normal" title="Pikicast"/>
+                                        <connections>
+                                            <action selector="clickStore:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HaX-n3-PuN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWK-kx-m2A">
+                                        <rect key="frame" x="169" y="614" width="76" height="98"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="98" id="Wwv-6s-sFr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                        <state key="normal" title="__"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rkT-r3-GUH" secondAttribute="trailing" id="Eq9-iW-JP7"/>
+                            <constraint firstItem="2im-fm-jCn" firstAttribute="centerY" secondItem="ztN-4f-Lyo" secondAttribute="centerY" id="TtK-pr-k3n"/>
+                            <constraint firstItem="rkT-r3-GUH" firstAttribute="top" secondItem="ztN-4f-Lyo" secondAttribute="bottom" id="d6D-Qr-wzr"/>
+                            <constraint firstItem="ztN-4f-Lyo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-80" id="hsf-B4-BOa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="rkT-r3-GUH" secondAttribute="bottom" id="wP8-SR-ori"/>
+                            <constraint firstItem="2im-fm-jCn" firstAttribute="leading" secondItem="ztN-4f-Lyo" secondAttribute="trailing" constant="30" id="x7o-ZZ-5oz"/>
+                            <constraint firstItem="ztN-4f-Lyo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="ylg-xJ-1RW"/>
+                            <constraint firstItem="rkT-r3-GUH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zdZ-Ec-edy"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-39.130434782608695" y="60.9375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
