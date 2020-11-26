@@ -56,20 +56,8 @@
                                             <action selector="clickA:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7ID-nC-rIG"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4K4-IR-AbL">
-                                        <rect key="frame" x="167" y="204.5" width="80" height="98"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="ElX-8q-V0I"/>
-                                            <constraint firstAttribute="height" constant="98" id="dUJ-gh-ojR"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="72"/>
-                                        <state key="normal" title="B"/>
-                                        <connections>
-                                            <action selector="clickB:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8g3-1Z-MUb"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0a2-vg-bBd">
-                                        <rect key="frame" x="89.5" y="409.5" width="235" height="98"/>
+                                        <rect key="frame" x="89.5" y="307" width="235" height="98"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="98" id="XcQ-gh-2Jj"/>
                                         </constraints>

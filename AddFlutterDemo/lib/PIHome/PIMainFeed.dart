@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
-
-class PIMainFeed{
-  static Widget run() {
-    return PIMainFeedApp();
-  }
-}
+import 'PIMainCategoryFeed.dart';
+import 'PIMainFeedModel.dart';
+import 'package:provider/provider.dart';
 
 class PIMainFeedApp extends StatelessWidget {
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'PIMainFeed',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: PIMainFeedPage(title: 'Pikicast'),
+        title: 'PIMainFeed',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home:MultiProvider(
+          providers:[
+            ChangeNotifierProvider(
+              create: (context) {
+                var model = PIMainFeedModel();
+                model.load();
+                return model;
+              },
+            ),
+          ],
+          child: PIMainFeedPage(title: 'Pikicast'),
+        )
     );
   }
 }
@@ -27,59 +34,71 @@ class PIMainFeedPage extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body:Container(
-        color: Colors.white,
-        child:SizedBox.expand(
-          child: Column(
-            children: [
-              PIMainFeedLiveEditorWrapper(),
-              Expanded(
-                  child:SizedBox.expand(
-                    child:
-                    Padding(
-                        padding: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 30),
-                        child: ListView(
-                            children:[
-                              PIMainFeedTopFeaturedBanner(),
-                              PIMainFeedRecommended(),
-                              PIMainFeedJustUpdated(),
-                              PIMainFeedRecommendedEditors(),
-                              PIMainFeedFeaturedLive(),
-                              PIMainFeedCategory(),
-                            ]
-                        )
-                    ),
-                  )
-              )
-            ],
-          ),
+        appBar: AppBar(
+          title: Text(title),
         ),
-      )
+        body:Consumer<PIMainFeedModel>(
+            builder: (context, mainFeedModel, child){
+              if (mainFeedModel.loaded){
+                return Container(
+                  color: Colors.white,
+                  child:SizedBox.expand(
+                    child: Column(
+                      children: [
+                        PIMainFeedLiveEditorWrapper(mainFeedModel.liveEditorList),
+                        Expanded(
+                            child:SizedBox.expand(
+                              child:
+                              Padding(
+                                  padding: EdgeInsets.only(left: 0, top: 10, right: 0, bottom: 30),
+                                  child: ListView(
+                                      children:[
+                                        PIMainFeedTopFeaturedBanner(),
+                                        PIMainFeedRecommended(),
+                                        PIMainFeedJustUpdated(),
+                                        PIMainFeedRecommendedEditors(),
+                                        PIMainFeedFeaturedLive(),
+                                        PIMainFeedCategory(),
+                                      ]
+                                  )
+                              ),
+                            )
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              }else{
+                return Center(child: Text('Loading...'),);
+              }
+            }
+        ),
     );
   }
 }
 
 class PIMainFeedLiveEditorWrapper extends StatelessWidget {
+  final List<PILiveEditorModel> liveEditorList;
+  PIMainFeedLiveEditorWrapper(this.liveEditorList);
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(top: 20) ,
-        child: SizedBox(
-            height:100,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              padding:EdgeInsets.only(left: 15, right: 15),
-              itemBuilder:(context, index) {
-                return PIMainFeedShortcutEditor();
-              },
-              separatorBuilder: (BuildContext context, int index){
-                return SizedBox(width: 15);
-              },
-              itemCount:20,
-            )
+        padding: EdgeInsets.only(top: 20),
+        child:Container(
+          height: 105, padding: EdgeInsets.only(bottom: 5), decoration:BoxDecoration(
+          color: Colors.white,
+          boxShadow: [BoxShadow(color: Color(0xffeaeaea),offset: Offset(0.0, 3.0), blurRadius: 3.0)],),
+          child:ListView.separated(
+            scrollDirection: Axis.horizontal,
+            padding:EdgeInsets.only(left: 15, right: 15),
+            itemBuilder:(context, index) {
+              return PIMainFeedShortcutEditor(liveEditorList[index]);
+            },
+            separatorBuilder: (BuildContext context, int index){
+              return SizedBox(width: 15);
+            },
+            itemCount:liveEditorList.length,
+          ),
         )
     );
   }
@@ -89,18 +108,30 @@ class PIMainFeedTopFeaturedBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(padding: EdgeInsets.only(left: 15, top: 20, right: 15, bottom: 10),
-      child:Container(
-          height: 120,
-          decoration: BoxDecoration(
-            color: Color(0xFFE8E8E8),
-            borderRadius: BorderRadius.all(Radius.circular(25.0)),
+        child:Container(
+            height: 120,
+            decoration: BoxDecoration(
+              color: Color(0xFFE8E8E8),
+              borderRadius: BorderRadius.all(Radius.circular(25.0)),
 //            border:Border.all(width: 0, color: Colors.red),
-          ),
-          child: ListView(
-              scrollDirection:Axis.horizontal,
-              children:[]
-          )
-      ),
+            ),
+            child:SizedBox(
+                width: 200, height: 80,
+                child:RaisedButton(
+                  color: Colors.white,
+                  highlightColor: Colors.white,
+                  onPressed: (){
+                    Navigator.push( context,
+                        MaterialPageRoute(builder: (context) {
+                          return PIMainCategoryFeedPage(title:'Category');
+                        }
+                        )
+                    );
+                  },
+                  child: Text('Push Page', style: TextStyle(color: Colors.blue ,fontSize:20, fontWeight: FontWeight.w500)),
+                )
+            )
+        )
     );
   }
 }
@@ -175,6 +206,8 @@ class PIMainFeedRecommended extends StatelessWidget {
 }
 
 class PIMainFeedShortcutEditor extends StatelessWidget{
+  final PILiveEditorModel editor;
+  PIMainFeedShortcutEditor(this.editor);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -187,23 +220,26 @@ class PIMainFeedShortcutEditor extends StatelessWidget{
         Positioned(
         top: 5.0,
         child: Container(
+                width: 64,
                 height: 64,
                 decoration: BoxDecoration(
+                  image: editor.isLive ? DecorationImage(image: AssetImage('lib/PIHome/images/circle_line_on_air.png')) : null,
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                  border:Border.all(width: 2, color: Colors.red),
+                  border:Border.all(width: editor.isLive ? 0 : 2, color:Color(0xffd8d8d8)),
                 ),
-                child:Padding(
+                child: Padding(
                     padding: EdgeInsets.all(5),
-                    child: Image(image: AssetImage('lib/PIHome/images/icProfileDefault56Dp.png'))
+                    child: ClipOval(child: Image.network(editor.avatar, width:56, height: 56 ,fit:BoxFit.fill))
                 ),
               ),
           ),
           Positioned(
             top: 3.0,
-            child: Image(image: AssetImage('lib/PIHome/images/badgeOnAir.png')),),
+            right: editor.isLive ? null : 5,
+            child: editor.isLive ? Image(image: AssetImage('lib/PIHome/images/badgeOnAir.png')) : Image(image: AssetImage('lib/PIHome/images/circleF73939.png')),),
           Positioned(
             bottom: 8.0,
-            child:Text('zhouJing'),
+            child:Text(editor.name, style: TextStyle(color: Color(0x1d1d1d) ,fontSize:11, fontWeight: FontWeight.w400)),
           )
         ],
       ),

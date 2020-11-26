@@ -31,6 +31,8 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    
+    //[self clickStore:0];
 }
 
 -(IBAction)clickInit:(id)sender{
@@ -62,7 +64,7 @@
     
     //MethodChannel
     self.methodChannel = [FlutterMethodChannel
-                                              methodChannelWithName:@"example.methodChannel"
+                                              methodChannelWithName:@"com.pikicast.pikicast/API"
                                               binaryMessenger:flutterViewController.binaryMessenger];
      __weak typeof(self) weakSelf = self;
     [self.methodChannel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
@@ -113,19 +115,44 @@
 //    sendBlock(@"Hello-0");
 }
 
--(IBAction)clickB:(id)sender{
-    FlutterViewController *flutterViewController = [[FlutterViewController alloc] initWithProject:nil initialRoute:@"PIFlutterPB" nibName:nil bundle:nil];
-    [self presentViewController:flutterViewController animated:YES completion:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self dismissViewControllerAnimated:YES completion:nil];
-        });
-    }];
-}
-
 -(IBAction)clickStore:(id)sender{
     FlutterViewController *flutterViewController = [[FlutterViewController alloc] initWithProject:nil initialRoute:@"/" nibName:nil bundle:nil];
+    
+    self.methodChannel = [FlutterMethodChannel
+                                              methodChannelWithName:@"com.pikicast.pikicast/API"
+                                              binaryMessenger:flutterViewController.binaryMessenger];
+
+    [self.methodChannel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
+        if ([call.arguments isKindOfClass:[NSDictionary class]]) {
+            
+            NSLog(@"%@-%@", call.method, call.arguments);
+            
+            NSDictionary *arguments = call.arguments;
+            NSString * method = arguments[@"METHOD"];
+            NSDictionary * PARAMETERS = arguments[@"PARAMETERS"];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                if (1) {
+                    result(@"{\"data\":{\
+                                        \"liveEditorList\":[{\"identifier\":12345,\"name\":\"zhoujingM\",\"avatar\":\"/A00/2019/09/05/A00_26957104_1567669736.png\",\"isLive\":1},\
+                           {\"identifier\":12345,\"name\":\"zhoujingM\",\"avatar\":\"/A00/2019/09/05/A00_26957104_1567669736.png\",\"isLive\":0},\
+                           {\"identifier\":12345,\"name\":\"zhoujingM\",\"avatar\":\"/A00/2019/09/05/A00_26957104_1567669736.png\",\"isLive\":1},\
+                           {\"identifier\":12345,\"name\":\"zhoujingM\",\"avatar\":\"/A00/2019/09/05/A00_26957104_1567669736.png\",\"isLive\":0},\
+                           {\"identifier\":12345,\"name\":\"zhoujingM\",\"avatar\":\"/A00/2019/09/05/A00_26957104_1567669736.png\",\"isLive\":0},\
+                           {\"identifier\":12345,\"name\":\"zhoujingM\",\"avatar\":\"/A00/2019/09/05/A00_26957104_1567669736.png\",\"isLive\":0},\
+                           {\"identifier\":12345,\"name\":\"zhoujingM\",\"avatar\":\"/A00/2019/09/05/A00_26957104_1567669736.png\",\"isLive\":0},\
+                           {\"identifier\":12345,\"name\":\"zhouingM\",\"avatar\":\"/A00/2019/09/05/A00_26957104_1567669736.png\",\"isLive\":0},\
+                           {\"identifier\":12345,\"name\":\"zhoujingM\",\"avatar\":\"/A00/2019/09/05/A00_26957104_1567669736.png\",\"isLive\":0},\
+                           {\"identifier\":12345,\"name\":\"zhoujingM\",\"avatar\":\"/A00/2019/09/05/A00_26957104_1567669736.png\",\"isLive\":0},\
+                           {\"identifier\":12345,\"name\":\"zhoujingM\",\"avatar\":\"/A00/2019/09/05/A00_26957104_1567669736.png\",\"isLive\":0}]}}");
+                }else{
+                    result(@"{\"error\":{\"code\":\"ES11\",\"message\":\"I am error\"}}");
+                }
+            });
+        }}];
+    
     [self presentViewController:flutterViewController animated:YES completion:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(180 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self dismissViewControllerAnimated:YES completion:nil];
         });
     }];
